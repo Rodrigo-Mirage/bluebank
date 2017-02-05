@@ -1,0 +1,103 @@
+<!doctype html>
+<html >
+  <head>
+  <title>Blue Bank</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="wait" data-bind="visible: false">
+            Aguarde...
+    </div>
+    <div class='container' style="display: none;width:300px;" data-bind="visible: loaded">
+      <h2>BlueBank</h2>
+      <hr>
+     <section data-bind="visible: janela() == 'login'">
+        <input class="form-control" data-bind="value:ag, valueUpdate:'afterkeydown'" placeholder="Agencia"/><br/>
+        <input class="form-control"  data-bind="value:acc, valueUpdate:'afterkeydown'" placeholder="Conta"/><br/>
+        <input class="form-control"  data-bind="value:cpf, valueUpdate:'afterkeydown'" placeholder="CPF"/><br/>
+        <input type='submit' class="btn btn-primary" value='ENTRAR' data-bind="click: function(){logar(); }"/>
+
+     </section>
+
+     <section data-bind="visible: janela() == 'inicio'">
+        
+        <input type='submit' class="btn btn-primary" value='Saldos' data-bind="click: function(){saldo(); }"/><br/><br/>
+        <input type='submit' class="btn btn-warning" value='Transferência' data-bind="click: function(){transferencia(); }"/><br/><br/>
+        <input type='submit' class="btn btn-danger" value='Sair' data-bind="click: function(){logout(); }"/>
+
+     </section>
+
+     <section data-bind="visible: janela() == 'saldo'">
+        
+        <table class="table">
+          <thead>
+            <th>Tipo</th>
+            <th>Valor</th>
+          </thead>
+          <tbody>
+            <!-- ko foreach: hist -->
+              <tr>
+                <td data-bind="text:tipo"></td>
+                <td data-bind="text:valor"></td>
+              </tr>
+            <!-- /ko -->
+
+                <td>TOTAL</td>
+                <td data-bind="text:total"></td>
+          </tbody>
+        </table>
+
+        <input type='submit' value='Voltar' data-bind="click: function(){voltar(); }"/>
+     </section>
+
+      <section data-bind="visible: janela() == 'transferir'">
+        
+        <input class="form-control" data-bind="value:tag, valueUpdate:'afterkeydown'" placeholder="Agencia"/><br/>
+        <input class="form-control" data-bind="value:tacc, valueUpdate:'afterkeydown'" placeholder="Conta"/><br/>
+        <input class="form-control" data-bind="value:tcpf, valueUpdate:'afterkeydown'" placeholder="CPF"/><br/>
+        <input class="form-control" data-bind="value:tvalor, valueUpdate:'afterkeydown'" placeholder="Valor"/><br/>
+        <input type='submit' class="btn btn-primary"  value='Continuar' data-bind="click: function(){confirmar(); }"/>
+
+        <input type='submit' class="btn btn-warning" value='Voltar' data-bind="click: function(){voltar(); }"/>
+     </section>
+
+     <section data-bind="visible: janela() == 'confirmação'">
+        
+        <h5>Confirme os dados da transação:</h5>
+        <input disabled class="form-control" data-bind="value:tnome, valueUpdate:'afterkeydown'" placeholder="Agencia"/><br/>
+        <input disabled class="form-control" data-bind="value:tag, valueUpdate:'afterkeydown'" placeholder="Agencia"/><br/>
+        <input disabled class="form-control" data-bind="value:tacc, valueUpdate:'afterkeydown'" placeholder="Conta"/><br/>
+        <input disabled class="form-control" data-bind="value:tcpf, valueUpdate:'afterkeydown'" placeholder="CPF"/><br/>
+        <input disabled class="form-control" data-bind="value:tvalor, valueUpdate:'afterkeydown'" placeholder="Valor"/><br/>
+        <input type='submit' class="btn btn-primary"  value='Confirmar' data-bind="click: function(){confirmar(); }"/>
+
+        <input type='submit' class="btn btn-warning" value='Voltar' data-bind="click: function(){voltar(); }"/>
+     </section>
+
+     <section data-bind="visible: janela() == 'final'">
+        
+        <p data-bind="text:mess"></p>
+
+        <input type='submit' class="btn btn-primary"  value='Concluir' data-bind="click: function(){voltar(); }"/>
+     </section>
+
+     <section data-bind="visible: janela() == 'inexistente'">
+        <h5>A conta de Destino não existe.</h5>
+        
+        <input type='submit' class="btn btn-warning" value='Voltar' data-bind="click: function(){tentar(); }"/>
+     </section>
+
+     <section data-bind="visible: janela() == 'insuficiente'">
+        <h5>Seu Saldo não é suficiente para a transação.</h5>
+        
+        <input type='submit' class="btn btn-warning" value='Voltar' data-bind="click: function(){tentar(); }"/>
+     </section>
+
+      
+    </div>
+<script type="text/javascript" src="/controllers/controller.js"></script>
+  </body>
+</html>
+
