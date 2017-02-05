@@ -33,7 +33,7 @@ app.post('/getacc',function(req,res){
         res.json(document);
       }
       else{
-        res.json({mess:"Conta não encontrada"});
+        res.json({mess:"Conta de Destino não encontrada"});
       }
    });
 });
@@ -66,7 +66,6 @@ app.post('/sumary',function(req,res){
          
        }else{
         
-        console.log(results);
         res.json(results);
        }
     });

@@ -14,6 +14,8 @@
       <h2>BlueBank</h2>
       <hr>
      <section data-bind="visible: janela() == 'login'">
+     	<h4>Insira os dados da conta de Origem:</h4>
+        <h5 data-bind="visible: logerr" style="color:red" >Conta Inexistente</h5>
         <input class="form-control" data-bind="value:ag, valueUpdate:'afterkeydown'" placeholder="Agencia"/><br/>
         <input class="form-control"  data-bind="value:acc, valueUpdate:'afterkeydown'" placeholder="Conta"/><br/>
         <input class="form-control"  data-bind="value:cpf, valueUpdate:'afterkeydown'" placeholder="CPF"/><br/>
@@ -22,15 +24,15 @@
      </section>
 
      <section data-bind="visible: janela() == 'inicio'">
-        
-        <input type='submit' class="btn btn-primary" value='Saldos' data-bind="click: function(){saldo(); }"/><br/><br/>
-        <input type='submit' class="btn btn-warning" value='Transferência' data-bind="click: function(){transferencia(); }"/><br/><br/>
+        <h4>O que deseja fazer?</h4>
+        <input type='submit' class="btn btn-primary" value='Transferência' data-bind="click: function(){transferencia(); }"/><br/><br/>
+        <input type='submit' class="btn btn-warning" value='Saldos' data-bind="click: function(){saldo(); }"/><br/><br/>
         <input type='submit' class="btn btn-danger" value='Sair' data-bind="click: function(){logout(); }"/>
 
      </section>
 
      <section data-bind="visible: janela() == 'saldo'">
-        
+        <h4>Saldo</h4>
         <table class="table">
           <thead>
             <th>Tipo</th>
@@ -53,7 +55,7 @@
      </section>
 
       <section data-bind="visible: janela() == 'transferir'">
-        
+        <h4>Insira os dados da conta de Destino:</h4>
         <input class="form-control" data-bind="value:tag, valueUpdate:'afterkeydown'" placeholder="Agencia"/><br/>
         <input class="form-control" data-bind="value:tacc, valueUpdate:'afterkeydown'" placeholder="Conta"/><br/>
         <input class="form-control" data-bind="value:tcpf, valueUpdate:'afterkeydown'" placeholder="CPF"/><br/>
@@ -65,7 +67,7 @@
 
      <section data-bind="visible: janela() == 'confirmação'">
         
-        <h5>Confirme os dados da transação:</h5>
+        <h4>Confirme os dados da transação:</h4>
         <input disabled class="form-control" data-bind="value:tnome, valueUpdate:'afterkeydown'" placeholder="Agencia"/><br/>
         <input disabled class="form-control" data-bind="value:tag, valueUpdate:'afterkeydown'" placeholder="Agencia"/><br/>
         <input disabled class="form-control" data-bind="value:tacc, valueUpdate:'afterkeydown'" placeholder="Conta"/><br/>
@@ -78,21 +80,9 @@
 
      <section data-bind="visible: janela() == 'final'">
         
-        <p data-bind="text:mess"></p>
+        <h4 data-bind="text:mess"></h4>
 
         <input type='submit' class="btn btn-primary"  value='Concluir' data-bind="click: function(){voltar(); }"/>
-     </section>
-
-     <section data-bind="visible: janela() == 'inexistente'">
-        <h5>A conta de Destino não existe.</h5>
-        
-        <input type='submit' class="btn btn-warning" value='Voltar' data-bind="click: function(){tentar(); }"/>
-     </section>
-
-     <section data-bind="visible: janela() == 'insuficiente'">
-        <h5>Seu Saldo não é suficiente para a transação.</h5>
-        
-        <input type='submit' class="btn btn-warning" value='Voltar' data-bind="click: function(){tentar(); }"/>
      </section>
 
       

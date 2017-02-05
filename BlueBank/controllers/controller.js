@@ -14,6 +14,7 @@ function AppViewModel() {
 	model.tcpf = ko.observable("");
 	model.tvalor = ko.observable("");
 	model.tnome = ko.observable("");
+	model.logerr = ko.observable(false);
 
 
 	model.mess = ko.observable("");
@@ -23,6 +24,7 @@ function AppViewModel() {
 
 
 	model.logar = function(){
+			model.logerr(false);
 			var data = {
 				"ag":this.ag(),
 				"acc":this.acc(),
@@ -35,6 +37,8 @@ function AppViewModel() {
 
 						model.load();
 
+					}else{
+						model.logerr(true);
 					}
 			});
 	}
@@ -93,7 +97,8 @@ function AppViewModel() {
 			post("../getacc", ko.toJSON(data), function(res) {
 					if(!res.mess){
 						if(model.total()<model.tvalor()){
-							model.janela("insuficiente");
+							model.mess("Seu Saldo não é suficiente para a transação.");
+							model.janela("final");
 
 						}else{
 							model.tnome(res.nome);
@@ -101,7 +106,8 @@ function AppViewModel() {
 							model.janela("confirmação");
 						}
 					}else{
-							model.janela("inexistente");
+							model.mess("A Conta de Destino não existe");
+							model.janela("final");
 
 					}
 			});
@@ -123,9 +129,6 @@ function AppViewModel() {
 
 	model.logout = function(){
 		window.location.reload(false); 
-	};
-	model.tentar = function(){
-		model.janela("transferir");
 	};
 
 }
