@@ -1,0 +1,43 @@
+Utilizei nesse projeto:
+Nodejs
+Knockoutjs
+Mongodb
+Bootstrap
+
+Todos os modulos necessários podem ser isntalados usando o package.json
+
+A transferência entre contas se da pela adição de uma nova transação no banco de dados, que faz o calculo para descobrir o valor total em conta, assim com uma unica adição no banco é possivel reduzir o valor de uma conta e acrescentar em outra.
+
+Mas para que a conta tenha algum dinheiro é necessário que se acrescente no banco, alem de pelo menos 2 contas, ao menos uma transferencia, o id da conta de origem não importa, importa apenas a conta de destino.
+
+A utlização do Knockoutjs permite a criação de inumeras telas em unico arquivo html.
+Criando um pequeno fluxo:
+"Login": 		inserir conta de Origem (Agencia conta e cpf)
+Saldo : 		historico de transferencias
+Transferencia: 		abre um formulario para inserir a conta de destino e o valor
+Confirmação:		pede para que o usuario confirme os dados da conta de destino
+Telas de erro para: 	Conta inexistente, Valor insuficiente, erro de transferencia
+Tela final:		Confirmação da transferencia
+
+
+Atributos do banco de dados:
+
+Banco em mongodb 
+nome do banco: db_bluebank
+
+necessita de 2 collections:
+t_accs :tabela de contas
+	_id:	identificador padrão do mongodb
+	id:	identificador numero simples
+	ag:	Agencia
+	acc:	Conta
+	cpf:	CPF
+	nome:	Nome do Cliente
+	
+t_trans: tabela de transações
+	_id: 	identificador padrão do mongodb
+	send: 	Identificador de quem Enviou
+	rec:  	Identificador de quem Recebeu
+	valor:	Valor transferido
+
+
